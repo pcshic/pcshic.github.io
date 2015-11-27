@@ -1,9 +1,69 @@
 var PcshicApp = React.createClass({
+  getInitialState: function() {
+    return {
+      site: {
+        title: '板橋高中資訊社',
+        sub: 'pcshic'
+      },
+      part: [
+        {
+          title: '成果',
+          sub: '歷年資訊學科能力競賽成績',
+          icon: 'trophy',
+          data: './data/trophy.yml',
+          tab:  'trophy',
+          comp: <Trophy />
+        },
+        {
+          title: '名人堂',
+          sub: '歷屆資訊社名人',
+          icon: 'sun',
+          data: './data/hall.yml',
+          tab:  'hall',
+          comp: <PeopleList />
+        },
+        {
+          title: '社友',
+          sub: '資訊社的好夥伴們',
+          icon: 'send',
+          data: './data/friend.yml',
+          tab:  'friend',
+          comp: <PeopleList />
+        }
+      ]
+    }
+  },
+  yearSorter: function(L, R) {
+    return R.year - L.year;
+  },
   render: function() {
+    var site = this.state.site;
+    var part = this.state.part;
+    var sorter = this.yearSorter;
     return (
       <section id="main" className="ui center aligned container">
-        <SiteHeader />
-        <SiteBody />
+        <div className="ui basic segment">
+          <SiteHeader site={site} />
+          <SiteMenu>
+            {part}
+          </SiteMenu>
+        </div>
+        <div id="body">
+        {
+          part.map(function (art) {
+            return (
+              <SiteArticle art={art}>
+              {
+                React.cloneElement(art.comp, {
+                  data:   art.data,
+                  sorter: sorter
+                })
+              }
+              </SiteArticle>
+            )
+          })
+        }
+        </div>
         <SiteFooter />
       </section>
     )
@@ -13,39 +73,37 @@ var PcshicApp = React.createClass({
 var SiteHeader = React.createClass({
   render: function() {
     return (
-      <header id="title" className="ui vertical segment">
-        <div className="ui icon header">
-        <div className="content">
-          <h1>板橋高中資訊社</h1>
-          <small className="sub header">pcshic</small>
-        </div>
-        </div>
+      <header id="title" className="ui icon header">
+      <div className="content">
+        <h1>{this.props.site.title}</h1>
+        <small className="sub header">{this.props.site.sub}</small>
+      </div>
       </header>
     )
   }
 })
 
-var SiteBody = React.createClass({
-  yearSorter: function(L, R) {
-    return R.year - L.year;
+var SiteMenu = React.createClass({
+  componentDidMount: function() {
+    $('.menu .item').tab();
   },
   render: function() {
+    var children = this.props.children || [];
+    if ( !Array.isArray(children) )
+      children = [children];
     return (
-      <div id="body">
-        <Trophy
-          url="./data/trophy.yml"
-          sorter={this.yearSorter} />
-        <PeopleList
-          title="名人堂"
-          sub="歷屆資訊社名人"
-          url="./data/hall.yml"
-          sorter={this.yearSorter} />
-        <PeopleList
-          title="社友"
-          sub="資訊社的好夥伴們"
-          url="./data/friend.yml"
-          sorter={this.yearSorter} />
-      </div>
+      <nav className="ui pointing labeled icon menu">
+      {
+        children.map(function (child) {
+          return (
+            <div className="item" data-tab={child.tab}>
+              <i className={child.icon + " icon"}></i>
+              {child.title}
+            </div>
+          )
+        })
+      }
+      </nav>
     )
   }
 })
@@ -58,6 +116,24 @@ var SiteFooter = React.createClass({
   }
 })
 
+var SiteArticle = React.createClass({
+  render: function() {
+    var art   = this.props.art;
+    return (
+      <article className="ui basic tab segment" data-tab={art.tab}>
+        <header className="ui icon header">
+          <i className={art.icon + " icon"}></i>
+          <div className="content">
+            <h2>{art.title}</h2>
+            <div className="sub header">{art.sub}</div>
+          </div>
+        </header>
+        { this.props.children }
+      </article>
+    )
+  }
+})
+
 var PeopleList = React.createClass({
   getInitialState: function() {
     return {
@@ -66,7 +142,7 @@ var PeopleList = React.createClass({
   },
   componentDidMount: function() {
     var comp   = this;
-    var url    = this.props.url;
+    var url    = this.props.data;
     $.get(url, function (data) {
       comp.setState({
         users: YAML.parse(data).sort(comp.props.sorter)
@@ -74,30 +150,19 @@ var PeopleList = React.createClass({
     })
   },
   render: function() {
-    var title = this.props.title;
-    var sub   = this.props.sub;
     var users = this.state.users;
     return (
-      <article className="ui basic segment">
-        <header className="ui icon header">
-          <i className="sun icon"></i>
-          <div className="content">
-            <h2>{title}</h2>
-            <div className="sub header">{sub}</div>
-          </div>
-        </header>
-        <div className="ui doubling four column grid">
-        {
-          users.map(function (people) {
-            return (
-              <div className="column">
-                <PeopleCard people={people} />
-              </div>
-            )
-          })
-        }
-        </div>
-      </article>
+      <div className="ui doubling four column grid">
+      {
+        users.map(function (people) {
+          return (
+            <div className="column">
+              <PeopleCard people={people} />
+            </div>
+          )
+        })
+      }
+      </div>
     )
   }
 })
@@ -110,7 +175,7 @@ var Trophy = React.createClass({
   },
   componentDidMount: function() {
     var comp   = this;
-    var url    = this.props.url;
+    var url    = this.props.data;
     $.get(url, function (data) {
       comp.setState({
         contest: YAML.parse(data).sort(comp.props.sorter)
@@ -120,50 +185,41 @@ var Trophy = React.createClass({
   render: function() {
     var contest = this.state.contest;
     return (
-      <article className="ui basic segment">
-        <header className="ui icon header">
-          <i className="trophy icon"></i>
-          <div className="content">
-            <h2>成果</h2>
-            <div className="sub header">歷年資訊學科能力競賽成績</div>
-          </div>
-        </header>
-        <table className="ui celled structured table">
-          <thead>
-          <tr>
-            <th rowSpan="2">年度</th>
-            <th rowSpan="2">班級</th>
-            <th rowSpan="2">姓名</th>
-            <th colSpan="3">成績</th>
-          </tr>
-          <tr>
-            <th>校內賽</th>
-            <th>北區賽</th>
-            <th>全國賽</th>
-          </tr>
-          </thead>
-          <tbody>
-          {
-            contest.map(function (cont) {
-              return cont.contestant.map(function (student, i) {
-                return (
-                  <tr>
-                  {
-                    (i == 0)?<td rowSpan={cont.contestant.length}>{cont.year}</td>:''
-                  }
-                    <td>{student.class}</td>
-                    <td>{student.name}</td>
-                    <td>{student.school}</td>
-                    <td>{student.county}</td>
-                    <td>{student.nation}</td>
-                  </tr>
-                )
-              })
+      <table className="ui center aligned celled structured striped table">
+        <thead>
+        <tr>
+          <th rowSpan="2">年度</th>
+          <th rowSpan="2">班級</th>
+          <th rowSpan="2">姓名</th>
+          <th colSpan="3">成績</th>
+        </tr>
+        <tr>
+          <th>校內賽</th>
+          <th>北區賽</th>
+          <th>全國賽</th>
+        </tr>
+        </thead>
+        <tbody>
+        {
+          contest.map(function (cont) {
+            return cont.contestant.map(function (student, i) {
+              return (
+                <tr>
+                {
+                  (i == 0)?<td rowSpan={cont.contestant.length}>{cont.year}</td>:''
+                }
+                  <td>{student.class}</td>
+                  <td>{student.name}</td>
+                  <td>{student.school}</td>
+                  <td>{student.county}</td>
+                  <td>{student.nation}</td>
+                </tr>
+              )
             })
-          }
-          </tbody>
-        </table>
-      </article>
+          })
+        }
+        </tbody>
+      </table>
     )
   }
 })
