@@ -26,11 +26,25 @@ var SiteHeader = React.createClass({
 })
 
 var SiteBody = React.createClass({
+  yearSorter: function(L, R) {
+    return R.year - L.year;
+  },
   render: function() {
     return (
       <div id="body">
-        <PeopleList title="名人堂" sub="歷屆資訊社名人" url="./data/hall.yml" />
-        <PeopleList title="社友" sub="資訊社的好夥伴們" url="./data/friend.yml" />
+        <Trophy
+          url="./data/trophy.yml"
+          sorter={this.yearSorter} />
+        <PeopleList
+          title="名人堂"
+          sub="歷屆資訊社名人"
+          url="./data/hall.yml"
+          sorter={this.yearSorter} />
+        <PeopleList
+          title="社友"
+          sub="資訊社的好夥伴們"
+          url="./data/friend.yml"
+          sorter={this.yearSorter} />
       </div>
     )
   }
@@ -51,13 +65,11 @@ var PeopleList = React.createClass({
     }
   },
   componentDidMount: function() {
-    var comp = this;
-    var url  = this.props.url;
+    var comp   = this;
+    var url    = this.props.url;
     $.get(url, function (data) {
       comp.setState({
-        users: YAML.parse(data).sort(function (L,R) {
-          return R.year - L.year
-        })
+        users: YAML.parse(data).sort(comp.props.sorter)
       })
     })
   },
@@ -93,30 +105,64 @@ var PeopleList = React.createClass({
 var Trophy = React.createClass({
   getInitialState: function() {
     return {
-      year: []
+      contest: []
     }
   },
+  componentDidMount: function() {
+    var comp   = this;
+    var url    = this.props.url;
+    $.get(url, function (data) {
+      comp.setState({
+        contest: YAML.parse(data).sort(comp.props.sorter)
+      })
+    })
+  },
   render: function() {
+    var contest = this.state.contest;
     return (
       <article className="ui basic segment">
         <header className="ui icon header">
-          <i className="sun icon"></i>
+          <i className="trophy icon"></i>
           <div className="content">
-            <h2>名人堂</h2>
-            <div className="sub header">歷屆資訊社名人</div>
-          </div>
-          <div className="ui doubling four column grid">
-          {
-            year.sort(function (L,R) { return R.year - L.year }).map(function (people) {
-              return (
-                <div className="column">
-                  <PeopleCard people={people} />
-                </div>
-              )
-            })
-          }
+            <h2>成果</h2>
+            <div className="sub header">歷年資訊學科能力競賽成績</div>
           </div>
         </header>
+        <table className="ui celled structured table">
+          <thead>
+          <tr>
+            <th rowSpan="2">年度</th>
+            <th rowSpan="2">班級</th>
+            <th rowSpan="2">姓名</th>
+            <th colSpan="3">成績</th>
+          </tr>
+          <tr>
+            <th>校內賽</th>
+            <th>北區賽</th>
+            <th>全國賽</th>
+          </tr>
+          </thead>
+          <tbody>
+          {
+            contest.map(function (cont) {
+              return cont.contestant.map(function (student, i) {
+                return (
+                  <tr>
+                  {
+                    (i == 0)?<td rowSpan={cont.contestant.length}>{cont.year}</td>:''
+                  }
+                    <td>{student.class}</td>
+                    <td>{student.name}</td>
+                    <td>{student.school}</td>
+                    <td>{student.county}</td>
+                    <td>{student.nation}</td>
+                  </tr>
+                )
+              })
+            })
+          }
+          </tbody>
+        </table>
       </article>
     )
   }
