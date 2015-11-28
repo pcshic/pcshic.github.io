@@ -3,61 +3,56 @@ var PcshicApp = React.createClass({
     return {
       site: {
         title: '板橋高中資訊社',
-        sub: 'pcshic'
+        sub:   'pcshic'
       },
       part: [
         {
           title: '成果',
-          sub: '歷年資訊學科能力競賽成績',
-          icon: 'trophy',
-          data: './data/trophy.yml',
-          tab:  'trophy',
-          comp: <Trophy />
+          sub:   '歷年資訊學科能力競賽成績',
+          icon:  'trophy',
+          data:  './data/trophy.yml',
+          tab:   'trophy',
+          comp:  <Trophy />
         },
         {
           title: '名人堂',
-          sub: '歷屆資訊社名人',
-          icon: 'sun',
-          data: './data/hall.yml',
-          tab:  'hall',
-          comp: <PeopleList />
+          sub:   '歷屆資訊社名人',
+          icon:  'sun',
+          data:  './data/hall.yml',
+          tab:   'hall',
+          comp:  <PeopleList />
         },
         {
           title: '社友',
-          sub: '資訊社的好夥伴們',
-          icon: 'send',
-          data: './data/friend.yml',
-          tab:  'friend',
-          comp: <PeopleList />
+          sub:   '資訊社的好夥伴們',
+          icon:  'send',
+          data:  './data/friend.yml',
+          tab:   'friend',
+          comp:  <PeopleList />
         }
       ]
     }
   },
-  yearSorter: function(L, R) {
+  sorter: function(L, R) {
     return R.year - L.year;
   },
   render: function() {
-    var site = this.state.site;
-    var part = this.state.part;
-    var sorter = this.yearSorter;
+    var app = this;
     return (
       <section id="main" className="ui center aligned container">
         <div className="ui basic segment">
-          <SiteHeader site={site} />
-          <SiteMenu>
-            {part}
-          </SiteMenu>
+          <SiteHeader site={app.state.site} />
+          <SiteMenu>{app.state.part}</SiteMenu>
         </div>
         <div id="body">
         {
-          part.map(function (art) {
+          app.state.part.map(function (art) {
             return (
               <SiteArticle art={art}>
               {
-                React.cloneElement(art.comp, {
-                  data:   art.data,
-                  sorter: sorter
-                })
+                (art.comp)?
+                  React.cloneElement(art.comp, { data: art.data, sorter: app.sorter }):
+                  ''
               }
               </SiteArticle>
             )
@@ -118,7 +113,7 @@ var SiteFooter = React.createClass({
 
 var SiteArticle = React.createClass({
   render: function() {
-    var art   = this.props.art;
+    var art = this.props.art;
     return (
       <article className="ui basic tab segment" data-tab={art.tab}>
         <header className="ui icon header">
@@ -170,6 +165,13 @@ var PeopleList = React.createClass({
 var Trophy = React.createClass({
   getInitialState: function() {
     return {
+      title: [
+        { name: '年度', row: 2 },
+        { name: '班級', row: 2 },
+        { name: '姓名', row: 2 },
+        { name: '成績', col: 3 }
+      ],
+      subTitle: ['校內賽', '北區賽', '全國賽'],
       contest: []
     }
   },
@@ -184,19 +186,23 @@ var Trophy = React.createClass({
   },
   render: function() {
     var contest = this.state.contest;
+    var title   = ['']
     return (
       <table className="ui center aligned celled structured striped table">
         <thead>
         <tr>
-          <th rowSpan="2">年度</th>
-          <th rowSpan="2">班級</th>
-          <th rowSpan="2">姓名</th>
-          <th colSpan="3">成績</th>
+        {
+          this.state.title.map(function (data) {
+            return <th rowSpan={data.row} colSpan={data.col}>{data.name}</th>
+          })
+        }
         </tr>
         <tr>
-          <th>校內賽</th>
-          <th>北區賽</th>
-          <th>全國賽</th>
+        {
+          this.state.subTitle.map(function (data) {
+            return <th>{data}</th>
+          })
+        }
         </tr>
         </thead>
         <tbody>
