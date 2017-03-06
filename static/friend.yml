@@ -1,0 +1,20 @@
+- name: "林煥博"
+  year: 2008
+  uva:
+    id: 18560
+    name: "foxs91092"
+  school:
+  - "清水高中"
+  - "交大資工系"
+  - "交大資工所"
+- name: "楊翔雲"
+  year: 2011
+  nick: "morris"
+  uva:
+    id: 46705
+    name: "morris821028"
+  school:
+  - "花蓮高中"
+  - "中興資工系"
+  - "中央資工系"
+  - "臺大資工所"

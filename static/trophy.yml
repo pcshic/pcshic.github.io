@@ -1,0 +1,335 @@
+- year: 2000
+  contestant:
+  - name: "游政偉"
+    nation: "三等獎"
+  - name: "陳聯聖"
+    class: 207
+    nation: "入選"
+  - name: "溫健弘"
+    class: 208
+    nation: "入選"
+- year: 2001
+  contestant:
+  - name: "吳嘉祥"
+    class: 205
+    school: "第一名"
+    county: "第一名"
+  - name: "溫健弘"
+    class: 308
+    school: "第二名"
+    county: "第三名"
+  - name: "謝孝典"
+    class: 210
+    school: "第三名"
+  - name: "蔡政育"
+    class: 205
+    school: "第四名"
+    county: "佳作"
+  - name: "洪頂倫"
+    class: 210
+    school: "第五名"
+    county: "第五名"
+- year: 2002
+  contestant:
+  - name: "吳嘉祥"
+    class: 305
+    school: "第一名"
+    county: "第三名"
+  - name: "陳奐廷"
+    class: 209
+    school: "第二名"
+    county: "第二名"
+  - name: "蔡政育"
+    class: 305
+    school: "第三名"
+    county: "佳作"
+  - name: "洪頂倫"
+    class: 310
+    school: "第四名"
+    county: "第五名"
+  - name: "盧瑞元"
+    class: 207
+    school: "第五名"
+    county: "佳作"
+- year: 2003
+  contestant:
+  - name: "徐國鐘"
+    class: 309
+    school: "第一名"
+    county: "第二名"
+  - name: "陳奐廷"
+    class: 309
+    school: "第二名"
+    county: "第一名"
+  - name: "曹伯瑞"
+    class: 306
+    school: "第三名"
+    county: "佳作"
+  - name: "盧瑞元"
+    class: 307
+    school: "第四名"
+    county: "第四名"
+  - name: "陳韋縉"
+    class: 208
+    school: "第五名"
+- year: 2004
+  contestant:
+  - name: "蔡德育"
+    class: 110
+    school: "第一名"
+    county: "第一名"
+  - name: "李品學"
+    class: 211
+    school: "第二名"
+  - name: "陳韋縉"
+    class: 308
+    school: "第三名"
+    county: "佳作"
+  - name: "王裕盛"
+    class: 110
+    school: "第四名"
+    county: "第三名"
+  - name: "林長融"
+    class: 205
+    school: "第五名"
+    county: "第四名"
+- year: 2005
+  contestant:
+  - name: "蔡德育"
+    class: 210
+    school: "第一名"
+    county: "第一名"
+    nation: "三等獎"
+  - name: "黃翔昱"
+    class: 311
+    school: "第二名"
+    county: "第四名"
+  - name: "李品學"
+    class: 311
+    school: "第三名"
+    county: "佳作"
+  - name: "廖挺富"
+    class: 204
+    school: "第四名"
+    county: "佳作"
+  - name: "王裕盛"
+    class: 210
+    school: "第五名"
+    county: "佳作"
+- year: 2006
+  contestant:
+  - name: "蔡德育"
+    class: 310
+    nation: "一等獎"
+  - name: "廖挺富"
+    class: 304
+    school: "第一名"
+    county: "第一名"
+  - name: "王裕盛"
+    class: 310
+    school: "第二名"
+    county: "第二名"
+    nation: "三等獎"
+  - name: "王辰丰"
+    class: 304
+    school: "第三名"
+    county: "第三名"
+  - name: "廖婉珊"
+    class: 219
+    school: "第四名"
+    county: "第四名"
+  - name: "盧天祥"
+    class: 211
+    school: "第五名"
+    county: "第五名"
+- year: 2007
+  contestant:
+  - name: "饒亢"
+    class: 312
+    school: "第一名"
+    county: "第三名"
+  - name: "盧天祥"
+    class: 311
+    school: "第二名"
+    county: "第二名"
+    nation: "三等獎"
+  - name: "劉照全"
+    class: 219
+    school: "第三名"
+    county: "佳作"
+  - name: "莊立楷"
+    class: 219
+    school: "第四名"
+    county: "第四名"
+  - name: "張君豪"
+    class: 212
+    school: "第五名"
+- year: 2008
+  contestant:
+  - name: "許恆與"
+    class: 217
+    school: "第一名"
+    county: "第三名"
+  - name: "劉照全"
+    class: 319
+    school: "第二名"
+    county: "第四名"
+    nation: "三等獎"
+  - name: "郭人維"
+    class: 210
+    school: "第三名"
+    county: "第二名"
+    nation: "三等獎"
+  - name: "莊立楷"
+    class: 319
+    school: "第四名"
+    county: "第一名"
+    nation: "三等獎"
+  - name: "栗漢文"
+    class: 319
+    school: "第五名"
+    county: "佳作"
+- year: 2009
+  contestant:
+  - name: "廖唯辰"
+    class: 219
+    school: "第一名"
+    county: "第五名"
+  - name: "蔡昕澔"
+    class: 219
+    school: "第二名"
+    county: "第三名"
+  - name: "許恆與"
+    class: 317
+    school: "第三名"
+    county: "第二名"
+    nation: "三等獎"
+  - name: "郭人維"
+    class: 310
+    school: "第四名"
+    county: "第一名"
+    nation: "三等獎"
+  - name: "林光勛"
+    class: 219
+    school: "第五名"
+    county: "第四名"
+- year: 2010
+  contestant:
+  - name: "蔡昕澔"
+    class: 319
+    school: "第一名"
+    county: "第二名"
+  - name: "廖唯辰"
+    class: 319
+    school: "第二名"
+    county: "第一名"
+    nation: "三等獎"
+  - name: "黃勁捷"
+    class: 219
+    school: "第三名"
+    county: "第三名"
+    nation: "三等獎"
+  - name: "鄭書奇"
+    class: 219
+    school: "第四名"
+    county: "第五名"
+    nation: "三等獎"
+  - name: "何俊宏"
+    class: 211
+    school: "第五名"
+    county: "第四名"
+- year: 2011
+  contestant:
+  - name: "鄭書奇"
+    class: 319
+    school: "第一名"
+    county: "第五名"
+  - name: "黃勁捷"
+    class: 319
+    school: "第二名"
+    county: "第三名"
+    nation: "三等獎"
+  - name: "何俊宏"
+    class: 311
+    school: "第三名"
+    county: "第一名"
+    nation: "三等獎"
+  - name: "謝長恩"
+    class: 311
+    school: "第四名"
+    county: "第二名"
+  - name: "謝廷揚"
+    class: 211
+    school: "第五名"
+    county: "佳作"
+- year: 2012
+  contestant:
+  - name: "劉啟昇"
+    class: 211
+    school: "第一名"
+    county: "第一名"
+  - name: "駱奕安"
+    class: 312
+    school: "第二名"
+    county: "第三名"
+  - name: "劉詠謙"
+    class: 319
+    school: "第三名"
+    county: "(物理)"
+  - name: "鍾河柏"
+    class: 217
+    school: "第四名"
+    county: "佳作"
+  - name: "翁甫廉"
+    class: 203
+    school: "第五名"
+    county: "佳作"
+  - name: "張哲維"
+    class: 218
+    school: "第六名"
+    county: "佳作"
+- year: 2013
+  contestant:
+  - name: "劉啟昇"
+    class: 311
+    school: "第一名"
+    county: "第二名"
+  - name: "吳易倫"
+    class: 219
+    school: "第二名"
+    county: "第三名"
+    nation: "二等獎"
+  - name: "羅昀謙"
+    class: 219
+    school: "第三名"
+    county: "佳作"
+  - name: "賴詰凱"
+    class: 216
+    school: "第四名"
+    county: "第四名"
+  - name: "鍾河柏"
+    class: 317
+    school: "第五名"
+    county: "佳作"
+- year: 2014
+  contestant:
+  - name: "吳易倫"
+    class: 319
+    school: "第一名"
+    county: "第一名"
+  - name: "羅浩倫"
+    class: 319
+    school: "第二名"
+    county: "第五名"
+  - name: "吳宥衡"
+    class: 319
+    school: "第三名"
+    county: "第四名"
+  - name: "洪得揚"
+    class: 319
+    school: "第四名"
+    county: "佳作"
+  - name: "許祐誠"
+    class: 213
+    school: "第五名"
+    county: "第三名"
